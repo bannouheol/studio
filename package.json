@@ -18,6 +18,7 @@
     "@sanity/base": "^1.149.10",
     "@sanity/components": "^1.149.10",
     "@sanity/core": "^1.149.12",
+    "@sanity/dashboard": "^1.149.10",
     "@sanity/default-layout": "^1.149.10",
     "@sanity/default-login": "^1.149.11",
     "@sanity/desk-tool": "^1.149.10",
@@ -28,7 +29,8 @@
     "react-barcode": "^1.4.0",
     "react-dom": "^16.13",
     "react-icons": "^3.10.0",
-    "sanity-plugin-content-model-graph": "^1.1.0"
+    "sanity-plugin-content-model-graph": "^1.1.0",
+    "sanity-plugin-dashboard-widget-now": "^0.0.6"
   },
   "repository": {
     "type": "git",

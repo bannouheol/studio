@@ -14,19 +14,23 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "barcode-input",
-    "content-model-graph"
+    "content-model-graph",
+    "@sanity/dashboard",
+    "dashboard-widget-now"
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [
     {
       "name": "part:@sanity/base/schema",
       "path": "./schemas/schema.js"
+    },
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "./dashboardConfig.js"
     }
   ]
 }
