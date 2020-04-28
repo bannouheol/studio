@@ -69,6 +69,12 @@ export default {
       type: 'file',
     },
     {
+      title: 'Fichier vidéo',
+      description: 'Uploader directement un fichier MP4',
+      name: 'videoFile',
+      type: 'file',
+    },
+    {
       title: 'Vidéo YouTube',
       name: 'video',
       type: 'youtube',
