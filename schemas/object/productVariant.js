@@ -31,6 +31,7 @@ export default {
     },
     {
       title: 'Date de réapprovisionnement',
+      description: 'Indiquer la date approximative à laquelle le client pourra être livré',
       name: 'resupplyingDate',
       type: 'date',
     },
