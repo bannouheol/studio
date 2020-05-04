@@ -23,6 +23,11 @@ export default {
       type: 'localeBlockContent',
     },
     {
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+    },
+    {
       name: 'linkedInFooter',
       title: 'Faire apparaître en pied de page',
       type: 'boolean',
@@ -32,6 +37,7 @@ export default {
     select: {
       title: 'title.br',
       subtitle: 'title.fr',
+      media: 'image',
     },
   },
 }
