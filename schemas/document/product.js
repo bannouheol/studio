@@ -1,26 +1,32 @@
-import { GiBookCover } from "react-icons/gi";
-import { parseISO, format } from "date-fns";
+import { GiBookCover } from 'react-icons/gi'
+import { parseISO, format } from 'date-fns'
 
 export default {
-  name: "product",
-  title: "Produit",
-  type: "document",
+  name: 'product',
+  title: 'Produit',
+  type: 'document',
   icon: GiBookCover,
   fields: [
     {
-      name: "ref",
-      title: "Référence",
-      type: "string",
+      name: 'ref',
+      title: 'Référence',
+      type: 'string',
     },
     {
-      name: "title",
-      title: "Titre",
-      type: "localeString",
+      name: 'title',
+      title: 'Titre',
+      type: 'localeString',
     },
     {
-      name: "slug",
-      title: "Slug",
-      type: "localeSlug",
+      name: 'seoTitle',
+      title: 'Titre SEO',
+      description: "[Référencement] Titre qui s'affiche dans la barre d'adresse",
+      type: 'localeString',
+    },
+    {
+      name: 'slug',
+      title: 'Slug',
+      type: 'localeSlug',
       /*
       validation: (Rule) =>
         Rule.custom((slugs) => {
@@ -33,94 +39,94 @@ export default {
         */
     },
     {
-      name: "previousPath",
-      title: "Adresse ancien site",
-      type: "string",
+      name: 'previousPath',
+      title: 'Adresse ancien site',
+      type: 'string',
     },
     {
-      name: "categories",
-      title: "Catégories",
-      type: "array",
+      name: 'categories',
+      title: 'Catégories',
+      type: 'array',
       of: [
         {
-          type: "reference",
-          to: { type: "category" },
+          type: 'reference',
+          to: { type: 'category' },
         },
       ],
     },
     {
-      name: "collection",
-      title: "Collection",
-      type: "reference",
-      to: { type: "collection" },
+      name: 'collection',
+      title: 'Collection',
+      type: 'reference',
+      to: { type: 'collection' },
       validation: (Rule) => Rule.required(),
     },
     {
-      title: "Default variant",
-      name: "defaultProductVariant",
-      type: "productVariant",
+      title: 'Default variant',
+      name: 'defaultProductVariant',
+      type: 'productVariant',
     },
     {
-      title: "Variants",
-      name: "variants",
-      type: "array",
+      title: 'Variants',
+      name: 'variants',
+      type: 'array',
       of: [
         {
-          title: "Variant",
-          type: "productVariant",
+          title: 'Variant',
+          type: 'productVariant',
         },
       ],
     },
     {
-      name: "vendor",
-      title: "Editeur",
-      type: "reference",
-      to: { type: "vendor" },
+      name: 'vendor',
+      title: 'Editeur',
+      type: 'reference',
+      to: { type: 'vendor' },
     },
     {
-      name: "body",
-      title: "Body",
-      type: "localeBlockContent",
+      name: 'body',
+      title: 'Body',
+      type: 'localeBlockContent',
     },
     {
-      title: "Traducteur(s)",
-      name: "traductors",
-      type: "array",
+      title: 'Traducteur(s)',
+      name: 'traductors',
+      type: 'array',
       of: [
         {
-          type: "reference",
-          to: { type: "profile" },
+          type: 'reference',
+          to: { type: 'profile' },
         },
       ],
     },
     {
-      title: "Age minimum",
-      name: "minimumAge",
-      type: "number",
+      title: 'Age minimum',
+      name: 'minimumAge',
+      type: 'number',
     },
     {
-      title: "Date de sortie",
-      name: "releaseDate",
-      type: "date",
+      title: 'Date de sortie',
+      name: 'releaseDate',
+      type: 'date',
     },
     {
-      title: "Caractéristiques du livre",
-      name: "bookFeature",
-      type: "bookFeature",
+      title: 'Caractéristiques du livre',
+      name: 'bookFeature',
+      type: 'bookFeature',
     },
     {
-      title: "Caractéristiques du DVD",
-      name: "dvdFeature",
-      type: "dvdFeature",
+      title: 'Caractéristiques du DVD',
+      name: 'dvdFeature',
+      type: 'dvdFeature',
     },
     {
-      title: "Vidéos YouTube",
-      name: "youtubeVideos",
-      type: "array",
+      title: 'Vidéos YouTube',
+      name: 'youtubeVideos',
+      type: 'array',
       of: [
         {
-          title: "Vidéo Youtube",
-          type: "youtube",
+          title: 'Vidéo Youtube',
+          type: 'youtube',
         },
       ],
     },
@@ -142,29 +148,26 @@ export default {
   ],
   preview: {
     select: {
-      titleBr: "title.br",
-      titleFr: "title.fr",
-      collection: "collection.title.br",
-      media: "defaultProductVariant.images[0]",
-      date: "releaseDate",
+      titleBr: 'title.br',
+      titleFr: 'title.fr',
+      collection: 'collection.title.br',
+      media: 'defaultProductVariant.images[0]',
+      date: 'releaseDate',
     },
     prepare(selection) {
-      const { titleBr, titleFr, collection, date, media } = selection;
+      const { titleBr, titleFr, collection, date, media } = selection
       return {
         title: titleBr,
-        subtitle: `${titleFr}, ${collection}, ${format(
-          parseISO(date),
-          "dd/MM/yyyy"
-        )}`,
+        subtitle: `${titleFr}, ${collection}, ${format(parseISO(date), 'dd/MM/yyyy')}`,
         media,
-      };
+      }
     },
   },
   orderings: [
     {
-      title: "Date de sortie, nouveaux",
-      name: "releaseDateDesc",
-      by: [{ field: "releaseDate", direction: "desc" }],
+      title: 'Date de sortie, nouveaux',
+      name: 'releaseDateDesc',
+      by: [{ field: 'releaseDate', direction: 'desc' }],
     },
   ],
-};
+}
