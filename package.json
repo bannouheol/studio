@@ -15,13 +15,13 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/base": "^1.149.18",
-    "@sanity/components": "^1.149.18",
-    "@sanity/core": "^1.149.18",
-    "@sanity/dashboard": "^1.149.18",
-    "@sanity/default-layout": "^1.149.18",
+    "@sanity/base": "^1.149.19",
+    "@sanity/components": "^1.149.19",
+    "@sanity/core": "^1.149.19",
+    "@sanity/dashboard": "^1.149.19",
+    "@sanity/default-layout": "^1.149.19",
     "@sanity/default-login": "^1.149.18",
-    "@sanity/desk-tool": "^1.149.18",
+    "@sanity/desk-tool": "^1.149.19",
     "@sanity/vision": "^1.149.16",
     "date-fns": "^2.15.0",
     "prop-types": "^15.7",
@@ -37,6 +37,6 @@
     "url": "https://github.com/bannouheol/bannouheol.git"
   },
   "devDependencies": {
-    "@sanity/cli": "^1.149.18"
+    "@sanity/cli": "^1.149.19"
   }
 }
