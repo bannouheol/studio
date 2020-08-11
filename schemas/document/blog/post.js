@@ -3,7 +3,7 @@ import { parseISO, format } from 'date-fns'
 
 export default {
   name: 'blogPost',
-  title: 'Article de presse / Blog Post',
+  title: 'Article de presse',
   type: 'document',
   icon: MdLocalPostOffice,
   fields: [

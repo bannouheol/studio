@@ -1,22 +1,78 @@
-import { IoIosSettings } from "react-icons/io";
+import { IoIosSettings } from 'react-icons/io'
 
 export default {
-  name: "siteSettings",
-  title: "Site Settings",
-  type: "document",
+  name: 'siteSettings',
+  type: 'document',
+  title: 'Paramètres',
   liveEdit: false,
-  __experimental_actions: ["update", "publish" /* 'create', 'delete' */],
   icon: IoIosSettings,
+  __experimental_actions: [
+    //'create',
+    'update',
+    //'delete',
+    'publish',
+  ],
   fields: [
     {
-      name: "title",
-      title: "Title",
-      type: "localeString",
+      name: 'title',
+      type: 'localeString',
+      title: 'Title',
     },
     {
-      name: "description",
-      title: "Description",
-      type: "localeString",
+      name: 'url',
+      type: 'string',
+      title: 'URL',
+    },
+    {
+      name: 'mail',
+      type: 'string',
+      title: 'Mail',
+    },
+    {
+      name: 'description',
+      type: 'localeString',
+      title: 'Description',
+      description: 'Describe your website for search engines and social media.',
+    },
+    {
+      name: 'keywords',
+      type: 'array',
+      title: 'Keywords',
+      description: 'Add keywords that describes your portfolio.',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags',
+      },
+    },
+    {
+      name: 'instagram',
+      type: 'string',
+      title: 'Instagram',
+      description: 'username',
+    },
+    {
+      name: 'facebook',
+      type: 'string',
+      title: 'Facebook',
+      description: 'username',
+    },
+    {
+      name: 'youtube',
+      type: 'string',
+      title: 'YouTube',
+      description: 'username',
+    },
+    {
+      name: 'twitter',
+      type: 'string',
+      title: 'Twitter',
+      description: 'username',
+    },
+    {
+      name: 'spotify',
+      type: 'string',
+      title: 'Spotify',
+      description: 'username',
     },
   ],
-};
+}
