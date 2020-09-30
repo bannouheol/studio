@@ -15,20 +15,20 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/base": "^1.149.19",
-    "@sanity/components": "^1.149.19",
-    "@sanity/core": "^1.149.19",
-    "@sanity/dashboard": "^1.149.19",
-    "@sanity/default-layout": "^1.149.19",
-    "@sanity/default-login": "^1.149.18",
-    "@sanity/desk-tool": "^1.149.19",
-    "@sanity/vision": "^1.149.16",
-    "date-fns": "^2.15.0",
+    "@sanity/base": "^1.150.8",
+    "@sanity/components": "^1.150.8",
+    "@sanity/core": "^1.150.7",
+    "@sanity/dashboard": "^1.150.8",
+    "@sanity/default-layout": "^1.150.8",
+    "@sanity/default-login": "^1.150.1",
+    "@sanity/desk-tool": "^1.150.8",
+    "@sanity/vision": "^1.150.6",
+    "date-fns": "^2.16.1",
     "prop-types": "^15.7",
     "react": "^16.13",
     "react-barcode": "^1.4.0",
     "react-dom": "^16.13",
-    "react-icons": "^3.10.0",
+    "react-icons": "^3.11.0",
     "sanity-plugin-content-model-graph": "^1.1.1",
     "sanity-plugin-dashboard-widget-now": "^0.0.6"
   },
@@ -37,6 +37,6 @@
     "url": "https://github.com/bannouheol/bannouheol.git"
   },
   "devDependencies": {
-    "@sanity/cli": "^1.149.19"
+    "@sanity/cli": "^1.150.7"
   }
 }
