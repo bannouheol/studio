@@ -28,7 +28,7 @@
     "react": "^17.0",
     "react-barcode": "^1.4.0",
     "react-dom": "^17.0",
-    "react-icons": "^3.11.0",
+    "react-icons": "^4.1.0",
     "sanity-plugin-content-model-graph": "^1.1.1",
     "sanity-plugin-dashboard-widget-now": "^0.0.6"
   },
