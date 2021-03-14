@@ -30,7 +30,7 @@ export default {
       type: 'boolean',
     },
     {
-      title: 'Date de réapprovisionnement',
+      title: "Date d'approvisionnement ou réapprovisionnement",
       description: 'Indiquer la date approximative à laquelle le client pourra être livré',
       name: 'resupplyingDate',
       type: 'date',
