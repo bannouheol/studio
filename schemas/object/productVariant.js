@@ -1,3 +1,5 @@
+import ConditionalField from 'sanity-plugin-conditional-field'
+
 export default {
   title: 'Product variant',
   name: 'productVariant',
@@ -41,6 +43,10 @@ export default {
       //description: 'Indiquer la date approximative à laquelle le client pourra être livré',
       name: 'resupplyingDate',
       type: 'date',
+      inputComponent: ConditionalField,
+      options: {
+        condition: (document) => document.inStock === false,
+      },
     },
     {
       title: 'A paraître',
@@ -53,6 +59,10 @@ export default {
       //description: 'Indiquer la date approximative à laquelle le client pourra être livré',
       name: 'releaseDate',
       type: 'date',
+      inputComponent: ConditionalField,
+      options: {
+        condition: (document) => document.isForthcoming === true,
+      },
     },
     {
       name: 'images',
