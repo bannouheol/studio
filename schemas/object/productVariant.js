@@ -37,15 +37,21 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      title: "Date d'approvisionnement ou de réapprovisionnement",
+      //description: 'Indiquer la date approximative à laquelle le client pourra être livré',
+      name: 'resupplyingDate',
+      type: 'date',
+    },
+    {
       title: 'A paraître',
       name: 'isForthcoming',
       type: 'boolean',
       validation: (Rule) => Rule.required(),
     },
     {
-      title: 'Date de sortie ou de réapprovisionnement',
+      title: 'Date de sortie',
       //description: 'Indiquer la date approximative à laquelle le client pourra être livré',
-      name: 'resupplyingDate',
+      name: 'releaseDate',
       type: 'date',
     },
     {
