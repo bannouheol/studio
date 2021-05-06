@@ -16,11 +16,14 @@
     "barcode-input",
     "content-model-graph",
     "@sanity/dashboard",
-    "dashboard-widget-now"
+    "dashboard-widget-now",
+    "conditional-field"
   ],
   "env": {
     "development": {
-      "plugins": ["@sanity/vision"]
+      "plugins": [
+        "@sanity/vision"
+      ]
     }
   },
   "parts": [

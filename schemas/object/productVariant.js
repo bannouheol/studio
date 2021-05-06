@@ -27,12 +27,6 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      title: 'En vente',
-      name: 'forSale',
-      type: 'boolean',
-      validation: (Rule) => Rule.required(),
-    },
-    {
       title: 'En stock',
       name: 'inStock',
       type: 'boolean',
@@ -45,7 +39,7 @@ export default {
       type: 'date',
       inputComponent: ConditionalField,
       options: {
-        condition: (document) => document.inStock === false,
+        condition: (document) => document.defaultProductVariant.inStock === false,
       },
     },
     {
@@ -61,7 +55,7 @@ export default {
       type: 'date',
       inputComponent: ConditionalField,
       options: {
-        condition: (document) => document.isForthcoming === true,
+        condition: (document) => document.defaultProductVariant.isForthcoming === true,
       },
     },
     {
@@ -84,7 +78,6 @@ export default {
     },
   ],
   initialValue: {
-    onSale: true,
     inStock: true,
     isForthcoming: false,
   },
