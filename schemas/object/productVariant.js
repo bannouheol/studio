@@ -40,7 +40,8 @@ export default {
       type: 'date',
       inputComponent: ConditionalField,
       options: {
-        condition: (document) => document.defaultProductVariant.inStock === false,
+        condition: (document) =>
+          document.defaultProductVariant.inStock === false && document.defaultProductVariant.isForthcoming === false,
       },
     },
     {
