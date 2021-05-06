@@ -49,6 +49,15 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      title: 'Autoriser la prévente',
+      name: 'allowPreorder',
+      type: 'boolean',
+      inputComponent: ConditionalField,
+      options: {
+        condition: (document) => document.defaultProductVariant.isForthcoming === true,
+      },
+    },
+    {
       name: 'images',
       title: 'Images',
       type: 'array',
