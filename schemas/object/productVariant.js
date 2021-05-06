@@ -33,8 +33,9 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      title: "Date d'approvisionnement ou de réapprovisionnement",
-      //description: 'Indiquer la date approximative à laquelle le client pourra être livré',
+      title: 'Date de réapprovisionnement',
+      description:
+        '(ATTENTION A NE PAS CONFONDRE AVEC DATE DE SORTIE) Indiquer la date approximative à laquelle le client pourra être livré.',
       name: 'resupplyingDate',
       type: 'date',
       inputComponent: ConditionalField,
