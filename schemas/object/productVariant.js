@@ -49,16 +49,6 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      title: 'Date de sortie',
-      //description: 'Indiquer la date approximative à laquelle le client pourra être livré',
-      name: 'releaseDate',
-      type: 'date',
-      inputComponent: ConditionalField,
-      options: {
-        condition: (document) => document.defaultProductVariant.isForthcoming === true,
-      },
-    },
-    {
       name: 'images',
       title: 'Images',
       type: 'array',
