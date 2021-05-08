@@ -24,7 +24,7 @@
     "@sanity/desk-tool": "^2.10.2",
     "@sanity/vision": "^2.10.0",
     "conditional-field": "^1.0.2",
-    "date-fns": "^2.21.2",
+    "date-fns": "^2.21.3",
     "prop-types": "^15.7",
     "react": "^17.0",
     "react-barcode": "^1.4.0",
