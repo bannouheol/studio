@@ -17,6 +17,11 @@ export default {
       type: 'localeSlug',
     },
     {
+      name: 'seoOptimizedTitle',
+      title: 'SEO Optimized Title',
+      type: 'localeString',
+    },
+    {
       name: 'description',
       title: 'Description',
       type: 'localeBlockContent',
