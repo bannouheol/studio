@@ -26,7 +26,7 @@
     "conditional-field": "^1.0.2",
     "date-fns": "^2.24.0",
     "prop-types": "^15.7",
-    "react": "^17.0",
+    "react": "^18.2",
     "react-barcode": "^1.4.1",
     "react-dom": "^17.0",
     "react-icons": "^4.2.0",
