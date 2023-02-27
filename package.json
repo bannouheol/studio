@@ -39,6 +39,6 @@
     "url": "https://github.com/bannouheol/bannouheol.git"
   },
   "devDependencies": {
-    "@sanity/cli": "^2.20.0"
+    "@sanity/cli": "^3.5.0"
   }
 }
