@@ -1,5 +1,3 @@
-import ConditionalField from 'sanity-plugin-conditional-field'
-
 export default {
   title: 'Product variant',
   name: 'productVariant',
@@ -38,11 +36,7 @@ export default {
         '(ATTENTION A NE PAS CONFONDRE AVEC DATE DE SORTIE) Indiquer la date approximative à laquelle le client pourra être livré.',
       name: 'resupplyingDate',
       type: 'date',
-      inputComponent: ConditionalField,
-      options: {
-        condition: (document) =>
-          document.defaultProductVariant.inStock === false && document.defaultProductVariant.isForthcoming === false,
-      },
+      hidden: ({document}) => document?.defaultProductVariant?.inStock === true && document?.defaultProductVariant?.isForthcoming === false
     },
     {
       title: 'A paraître',
@@ -54,10 +48,7 @@ export default {
       title: 'Autoriser la prévente',
       name: 'allowPreorder',
       type: 'boolean',
-      inputComponent: ConditionalField,
-      options: {
-        condition: (document) => document.defaultProductVariant.isForthcoming === true,
-      },
+      hidden: ({document}) => document?.defaultProductVariant?.isForthcoming === true
     },
     {
       name: 'images',
@@ -75,7 +66,12 @@ export default {
     {
       title: 'Bar code',
       name: 'barcode',
-      type: 'barcode',
+      type: 'object',
+      fields: [{
+        name: 'barcode',
+        title: 'Barcode',
+        type: 'string'
+      }]
     },
   ],
   initialValue: {
