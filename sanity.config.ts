@@ -1,7 +1,8 @@
 // sanity.config.js
-import {defineConfig} from 'sanity'
-import {deskTool} from 'sanity/desk'
-import {schemaTypes} from './schemas/schema'
+import { defineConfig } from 'sanity'
+import { deskTool } from 'sanity/desk'
+import { visionTool } from '@sanity/vision'
+import { schemaTypes } from './schemas/schema'
 import { vercelDeployTool } from 'sanity-plugin-vercel-deploy'
 
 export default defineConfig({
@@ -9,10 +10,7 @@ export default defineConfig({
   title: 'Bannoù-heol',
   projectId: 'hk48qn3z',
   dataset: 'production',
-  plugins: [
-    deskTool(),
-    vercelDeployTool(),
-  ],
+  plugins: [deskTool(), visionTool(), vercelDeployTool()],
   schema: {
     types: schemaTypes,
   },
