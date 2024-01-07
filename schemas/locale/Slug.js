@@ -34,7 +34,7 @@ export default {
       },
       maxLength: 96,
       auto: true,
-      slugify: (input) => slugify(input),
+      slugify: (input) => slugify(input, { lower: true }),
     },
     validation: (Rule) => Rule.required(),
   })),
