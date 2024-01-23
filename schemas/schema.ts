@@ -23,32 +23,34 @@ import localeText from './locale/Text'
 import localeBlockContent from './locale/BlockContent'
 
 import siteSettings from './document/siteSettings'
+import selectedProducts from './document/selectedProducts'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export const schemaTypes = [
-    // The following are document types which will appear
-    // in the studio.
-    product,
-    collection,
-    profile,
-    category,
-    vendor,
-    dvdFeature,
-    bookFeature,
-    page,
-    blogPost,
-    blogAuthor,
-    blogCategory,
-    // When added to this list, object types can be used as
-    // { type: 'typename' } in other document schemas
-    blockContent,
-    localeString,
-    localeSlug,
-    localeText,
-    localeBlockContent,
-    youtube,
-    productVariant,
-    price,
-    imageWithCaption,
-    siteSettings,
+  // The following are document types which will appear
+  // in the studio.
+  product,
+  collection,
+  profile,
+  category,
+  vendor,
+  dvdFeature,
+  bookFeature,
+  page,
+  blogPost,
+  blogAuthor,
+  blogCategory,
+  selectedProducts,
+  // When added to this list, object types can be used as
+  // { type: 'typename' } in other document schemas
+  blockContent,
+  localeString,
+  localeSlug,
+  localeText,
+  localeBlockContent,
+  youtube,
+  productVariant,
+  price,
+  imageWithCaption,
+  siteSettings,
 ]
