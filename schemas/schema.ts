@@ -15,6 +15,7 @@ import dvdFeature from './object/dvdFeature'
 import bookFeature from './object/bookFeature'
 import youtube from './object/youtube'
 import price from './object/price'
+import barcode from './object/barcode'
 import imageWithCaption from './object/imageWithCaption'
 
 import localeString from './locale/String'
@@ -40,7 +41,6 @@ export const schemaTypes = [
   blogPost,
   blogAuthor,
   blogCategory,
-  selectedProducts,
   // When added to this list, object types can be used as
   // { type: 'typename' } in other document schemas
   blockContent,
@@ -53,4 +53,6 @@ export const schemaTypes = [
   price,
   imageWithCaption,
   siteSettings,
+  selectedProducts,
+  barcode,
 ]

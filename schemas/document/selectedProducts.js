@@ -9,8 +9,7 @@ export default {
       name: 'products',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'product' }] }],
-      validation: (Rule) => Rule.required(),
-      validation: (Rule) => Rule.unique(),
+      validation: (Rule) => Rule.required().unique(),
     },
   ],
   preview: {
