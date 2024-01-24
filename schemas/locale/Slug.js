@@ -19,6 +19,27 @@ function slugify(text) {
     .replace(/-+$/, ""); // Trim - from end of text
 } */
 
+function blogPostFormat(text) {
+  const regex = /([0-9]{4})\/([0-9]{2})\/(.+)/gm
+  const match = regex.exec(text)
+  return match
+}
+
+function customSlugify(text) {
+  return slugify(text, { lower: true })
+}
+
+function toSlug(text) {
+  const post = blogPostFormat(text)
+  if (post) {
+    post.shift() // remove the 1st element : 2023/10/ijdeijdeockekceolk to let the match array ["2023", "10", "ijdeijdeockekceolk"]
+    const postSlug = customSlugify(post.pop()) // slugify only the last element, the post slug without 2023/10
+    return [...post, postSlug].join('/') // join everything together
+  } else {
+    return customSlugify(text) // if it's not a blog post, just slugify the whole text
+  }
+}
+
 export default {
   type: 'object',
   name: 'localeSlug',
@@ -34,7 +55,7 @@ export default {
       },
       maxLength: 96,
       auto: true,
-      slugify: (input) => slugify(input, { lower: true }),
+      slugify: (input) => toSlug(input, { lower: true }),
     },
     validation: (Rule) => Rule.required(),
   })),
