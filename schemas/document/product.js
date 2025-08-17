@@ -1,5 +1,4 @@
 import { GiBookCover } from 'react-icons/gi'
-import { parseISO, format } from 'date-fns'
 
 export default {
   name: 'product',
@@ -156,9 +155,10 @@ export default {
     },
     prepare(selection) {
       const { titleBr, titleFr, collection, date, media } = selection
+      const formattedDate = new Intl.DateTimeFormat('fr-FR').format(new Date(date))
       return {
         title: titleBr,
-        subtitle: `${titleFr}, ${collection}, ${format(parseISO(date), 'dd/MM/yyyy')}`,
+        subtitle: `${titleFr}, ${collection}, ${formattedDate}`,
         media,
       }
     },
