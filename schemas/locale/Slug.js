@@ -26,7 +26,7 @@ function blogPostFormat(text) {
 }
 
 function customSlugify(text) {
-  return slugify(text, { lower: true })
+  return slugify(text, { strict: true, lower: true })
 }
 
 function toSlug(text) {
