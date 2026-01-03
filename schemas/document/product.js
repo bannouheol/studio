@@ -37,11 +37,11 @@ export default {
         }),
         */
     },
-    {
+    /* {
       name: 'previousPath',
       title: 'Adresse ancien site',
       type: 'string',
-    },
+    }, */
     {
       name: 'categories',
       title: 'Catégories',
