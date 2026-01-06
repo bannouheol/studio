@@ -18,7 +18,7 @@ export default defineType({
     {
       name: 'physical',
       title: 'Caractéristiques physiques',
-      options: { collapsible: true, collapsed: true },
+      options: { collapsible: true, collapsed: false },
     },
   ],
   fields: [
