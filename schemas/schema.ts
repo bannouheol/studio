@@ -1,4 +1,4 @@
-// We import object and document schemas
+// Document schemas
 import category from './document/category'
 import product from './document/product'
 import vendor from './document/vendor'
@@ -8,7 +8,10 @@ import blogPost from './document/blog/post'
 import blogAuthor from './document/blog/author'
 import blogCategory from './document/blog/category'
 import profile from './document/profile'
+import siteSettings from './document/siteSettings'
+import selectedProducts from './document/selectedProducts'
 
+// Object schemas
 import blockContent from './object/blockContent'
 import productVariant from './object/productVariant'
 import dvdFeature from './object/dvdFeature'
@@ -18,41 +21,37 @@ import price from './object/price'
 import barcode from './object/barcode'
 import imageWithCaption from './object/imageWithCaption'
 
+// Locale schemas
 import localeString from './locale/String'
 import localeSlug from './locale/Slug'
 import localeText from './locale/Text'
 import localeBlockContent from './locale/BlockContent'
 
-import siteSettings from './document/siteSettings'
-import selectedProducts from './document/selectedProducts'
-
-// Then we give our schema to the builder and provide the result to Sanity
 export const schemaTypes = [
-  // The following are document types which will appear
-  // in the studio.
+  // Document types
   product,
   collection,
   profile,
   category,
   vendor,
-  dvdFeature,
-  bookFeature,
   page,
   blogPost,
   blogAuthor,
   blogCategory,
-  // When added to this list, object types can be used as
-  // { type: 'typename' } in other document schemas
+  siteSettings,
+  selectedProducts,
+  // Object types
   blockContent,
+  productVariant,
+  dvdFeature,
+  bookFeature,
+  youtube,
+  price,
+  barcode,
+  imageWithCaption,
+  // Locale types
   localeString,
   localeSlug,
   localeText,
   localeBlockContent,
-  youtube,
-  productVariant,
-  price,
-  imageWithCaption,
-  siteSettings,
-  selectedProducts,
-  barcode,
 ]

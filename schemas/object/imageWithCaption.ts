@@ -1,25 +1,25 @@
-export default {
+import {defineType, defineField} from 'sanity'
+
+export default defineType({
   title: 'Image with caption',
   name: 'imageWithCaption',
   type: 'image',
   options: {
-    hotspot: true, // <-- Defaults to false
+    hotspot: true,
   },
   fields: [
-    {
+    defineField({
       name: 'caption',
       type: 'localeString',
       title: 'Caption',
       options: {
-        isHighlighted: true, // <-- make this field easily accessible
+        isHighlighted: true,
       },
-      //validation: (Rule) => Rule.required(),
-    },
-    {
-      // Editing this field will be hidden behind an "Edit"-button
+    }),
+    defineField({
       name: 'attribution',
       type: 'localeString',
       title: 'Attribution',
-    },
+    }),
   ],
-}
+})
