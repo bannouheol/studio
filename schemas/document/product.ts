@@ -1,6 +1,6 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { GiBookCover } from 'react-icons/gi'
-import { MdInfo, MdDescription, MdInventory, MdPeople, MdSettings, MdSearch } from 'react-icons/md'
+import { MdInfo, MdDescription, MdInventory, MdPeople, MdSettings, MdSearch, MdPermMedia } from 'react-icons/md'
 
 export default defineType({
   name: 'product',
@@ -10,6 +10,7 @@ export default defineType({
   groups: [
     { name: 'general', title: 'Général', icon: MdInfo, default: true },
     { name: 'description', title: 'Description', icon: MdDescription },
+    { name: 'media', title: 'Médias', icon: MdPermMedia },
     { name: 'variants', title: 'Images, Prix & Stock', icon: MdInventory },
     { name: 'bookFeatures', title: 'Caractéristiques du livre', icon: GiBookCover },
     { name: 'dvdFeatures', title: 'Caractéristiques du DVD', icon: MdSettings },
@@ -94,6 +95,8 @@ export default defineType({
       type: 'localeBlockContent',
       group: 'description',
     }),
+
+    // === MÉDIAS ===
     defineField({
       title: 'Vidéos YouTube',
       name: 'youtubeVideos',
@@ -105,7 +108,22 @@ export default defineType({
           type: 'youtube',
         }),
       ],
-      group: 'description',
+      group: 'media',
+    }),
+    defineField({
+      title: 'Fichiers audio',
+      name: 'audioFiles',
+      description: 'Extraits audio, podcasts ou enregistrements',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'file',
+          options: {
+            accept: 'audio/*',
+          },
+        }),
+      ],
+      group: 'media',
     }),
 
     // === VARIANTES & STOCK ===
