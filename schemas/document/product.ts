@@ -46,7 +46,6 @@ export default defineType({
       type: 'reference',
       to: [{ type: 'collection' }],
       group: 'general',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'categories',
@@ -60,6 +59,7 @@ export default defineType({
         }),
       ],
       group: 'general',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'vendor',
