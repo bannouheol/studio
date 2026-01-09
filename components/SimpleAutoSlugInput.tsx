@@ -15,6 +15,8 @@ function toSlug(text: string, lang?: string): string {
   else if (!lang) {
     processedText = processedText.replace(/&/g, 'et')
   }
+  // Replace apostrophes (straight, curly, and other variants) with dashes
+  processedText = processedText.replace(/[''']/g, '-')
   return slugify(processedText, { strict: true, lower: true })
 }
 
