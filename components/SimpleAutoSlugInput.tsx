@@ -3,16 +3,28 @@ import { SlugInputProps, useFormValue, set, unset } from 'sanity'
 import { Stack, TextInput, Button, Flex } from '@sanity/ui'
 import slugify from 'slugify'
 
-function toSlug(text: string): string {
-  return slugify(text, { strict: true, lower: true })
+function toSlug(text: string, lang?: string): string {
+  // Translate "&" based on language before slugifying
+  let processedText = text
+  if (lang === 'fr') {
+    processedText = processedText.replace(/&/g, 'et')
+  } else if (lang === 'br') {
+    processedText = processedText.replace(/&/g, 'ha')
+  }
+  // Default to French if no lang specified (for backwards compatibility)
+  else if (!lang) {
+    processedText = processedText.replace(/&/g, 'et')
+  }
+  return slugify(processedText, { strict: true, lower: true })
 }
 
 interface SimpleAutoSlugInputProps extends SlugInputProps {
   sourceField?: string
+  lang?: string
 }
 
 export function SimpleAutoSlugInput(props: SimpleAutoSlugInputProps) {
-  const { onChange, value, readOnly, schemaType } = props
+  const { onChange, value, readOnly, schemaType, lang } = props
 
   // Get source field from schema options or default to 'title'
   const sourceField = (schemaType.options as { source?: string })?.source || 'title'
@@ -33,7 +45,7 @@ export function SimpleAutoSlugInput(props: SimpleAutoSlugInputProps) {
       if (isUserTyping.current) {
         const inputValue = event.target.value
         if (inputValue) {
-          onChange(set({ current: toSlug(inputValue), _type: 'slug' }))
+          onChange(set({ current: toSlug(inputValue, lang), _type: 'slug' }))
         } else {
           onChange(unset())
         }
@@ -42,7 +54,7 @@ export function SimpleAutoSlugInput(props: SimpleAutoSlugInputProps) {
       }
       // If not user typing, just allow the value to display without generating slug
     },
-    [onChange]
+    [onChange, lang]
   )
 
   const handleKeyUp = useCallback(() => {
@@ -55,9 +67,9 @@ export function SimpleAutoSlugInput(props: SimpleAutoSlugInputProps) {
   const handleReset = useCallback(() => {
     userHasEdited.current = false
     if (sourceValue) {
-      onChange(set({ current: toSlug(sourceValue), _type: 'slug' }))
+      onChange(set({ current: toSlug(sourceValue, lang), _type: 'slug' }))
     }
-  }, [sourceValue, onChange])
+  }, [sourceValue, onChange, lang])
 
   return (
     <Stack space={2}>

@@ -4,8 +4,15 @@ import { Stack, TextInput, Button, Flex } from '@sanity/ui'
 import slugify from 'slugify'
 import { format, parseISO } from 'date-fns'
 
-function customSlugify(text: string): string {
-  return slugify(text, { strict: true, lower: true })
+function customSlugify(text: string, lang?: string): string {
+  // Translate "&" based on language before slugifying
+  let processedText = text
+  if (lang === 'fr') {
+    processedText = processedText.replace(/&/g, 'et')
+  } else if (lang === 'br') {
+    processedText = processedText.replace(/&/g, 'ha')
+  }
+  return slugify(processedText, { strict: true, lower: true })
 }
 
 function blogPostFormat(text: string): RegExpExecArray | null {
@@ -13,14 +20,14 @@ function blogPostFormat(text: string): RegExpExecArray | null {
   return regex.exec(text)
 }
 
-function toSlug(text: string): string {
+function toSlug(text: string, lang?: string): string {
   const post = blogPostFormat(text)
   if (post) {
     post.shift()
-    const postSlug = customSlugify(post.pop()!)
+    const postSlug = customSlugify(post.pop()!, lang)
     return [...post, postSlug].join('/')
   } else {
-    return customSlugify(text)
+    return customSlugify(text, lang)
   }
 }
 
@@ -40,9 +47,9 @@ export function AutoSlugInput(props: AutoSlugInputProps) {
     (title: string | undefined) => {
       if (!title) return ''
       const date = publishedAt ? format(parseISO(publishedAt), 'yyyy/MM/') : ''
-      return toSlug(date + title)
+      return toSlug(date + title, lang)
     },
-    [publishedAt]
+    [publishedAt, lang]
   )
 
   const handleKeyDown = useCallback(() => {
@@ -57,7 +64,7 @@ export function AutoSlugInput(props: AutoSlugInputProps) {
       if (isUserTyping.current) {
         const inputValue = event.target.value
         if (inputValue) {
-          onChange(set({ current: toSlug(inputValue), _type: 'slug' }))
+          onChange(set({ current: toSlug(inputValue, lang), _type: 'slug' }))
         } else {
           onChange(unset())
         }
@@ -66,7 +73,7 @@ export function AutoSlugInput(props: AutoSlugInputProps) {
       }
       // If not user typing, just allow the value to display without generating slug
     },
-    [onChange]
+    [onChange, lang]
   )
 
   const handleKeyUp = useCallback(() => {
