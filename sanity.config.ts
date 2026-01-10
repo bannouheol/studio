@@ -10,7 +10,7 @@ export default defineConfig({
   name: 'bannouheol',
   title: 'Bannoù-heol',
   projectId: 'hk48qn3z',
-  dataset: 'production',
+  dataset: 'staging',
   plugins: [
     structureTool({
       structure: (S) =>
@@ -22,7 +22,7 @@ export default defineConfig({
             S.documentTypeListItem('collection').title('Collection'),
             S.documentTypeListItem('profile').title('Profiles'),
             S.documentTypeListItem('category').title('Catégories de produits'),
-            S.documentTypeListItem('vendor').title('Editeurs'),
+            S.documentTypeListItem('publisher').title('Editeurs'),
             S.documentTypeListItem('page').title('Pages'),
             S.documentTypeListItem('blogPost').title('Articles de presse'),
             S.documentTypeListItem('blogAuthor').title('Journal, Radio, ...'),

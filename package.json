@@ -9,7 +9,9 @@
   "scripts": {
     "start": "sanity start",
     "test": "sanity check",
-    "build": "sanity build"
+    "build": "sanity build",
+    "backup:production": "sanity dataset export production backup-bannouheol-sanity-production-$(date +%Y%m%d-%Hh%M).tar.gz",
+    "backup:staging": "sanity dataset export staging backup-bannouheol-sanity-staging-$(date +%Y%m%d-%Hh%M).tar.gz"
   },
   "keywords": [
     "sanity"
@@ -26,13 +28,13 @@
     "sanity": "^5.2.0",
     "sanity-plugin-vercel-deploy": "^4.0.0",
     "slugify": "^1.6.6",
-    "styled-components": "^6.2.0"
+    "styled-components": "^6.3.1"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/bannouheol/bannouheol.git"
   },
   "devDependencies": {
-    "@sanity/cli": "^5.2.0"
+    "@sanity/cli": "5.2.0"
   }
 }

@@ -62,11 +62,11 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'vendor',
+      name: 'publisher',
       title: 'Éditeur',
       description: "Maison d'édition du produit",
       type: 'reference',
-      to: [{ type: 'vendor' }],
+      to: [{ type: 'publisher' }],
       group: 'general',
     }),
     defineField({

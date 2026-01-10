@@ -1,7 +1,7 @@
 // Document schemas
 import category from './document/category'
 import product from './document/product'
-import vendor from './document/vendor'
+import publisher from './document/publisher'
 import collection from './document/collection'
 import page from './document/page'
 import blogPost from './document/blog/post'
@@ -33,7 +33,7 @@ export const schemaTypes = [
   collection,
   profile,
   category,
-  vendor,
+  publisher,
   page,
   blogPost,
   blogAuthor,
