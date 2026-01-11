@@ -1,18 +1,16 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef, useEffect } from 'react'
 import { SlugInputProps, useFormValue, set, unset } from 'sanity'
 import { Stack, TextInput, Button, Flex } from '@sanity/ui'
 import slugify from 'slugify'
 import { format, parseISO } from 'date-fns'
 
 function customSlugify(text: string, lang?: string): string {
-  // Translate "&" based on language before slugifying
   let processedText = text
   if (lang === 'fr') {
     processedText = processedText.replace(/&/g, 'et')
   } else if (lang === 'br') {
     processedText = processedText.replace(/&/g, 'ha')
   }
-  // Replace apostrophes (straight, curly, and other variants) with dashes
   processedText = processedText.replace(/[''']/g, '-')
   return slugify(processedText, { strict: true, lower: true })
 }
@@ -41,9 +39,15 @@ export function AutoSlugInput(props: AutoSlugInputProps) {
   const { onChange, value, lang, readOnly } = props
   const titleValue = useFormValue(['title', lang]) as string | undefined
   const publishedAt = useFormValue(['publishedAt']) as string | undefined
-  const userHasEdited = useRef(false)
-  const isUserTyping = useRef(false)
-  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  // Track if this is the initial mount (to avoid triggering on document open)
+  const isInitialMount = useRef(true)
+  // Track the previous title to detect actual changes
+  const previousTitleRef = useRef<string | undefined>(undefined)
+  // Track if user has manually edited the slug
+  const userHasEditedSlug = useRef(false)
+  // Track if user is typing in the slug field
+  const isUserTypingInSlug = useRef(false)
 
   const generateSlug = useCallback(
     (title: string | undefined) => {
@@ -54,39 +58,65 @@ export function AutoSlugInput(props: AutoSlugInputProps) {
     [publishedAt, lang]
   )
 
+  // Watch title changes and auto-generate slug
+  useEffect(() => {
+    // Skip the initial mount to avoid marking document as draft on open
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+      previousTitleRef.current = titleValue
+      return
+    }
+
+    // Only proceed if title actually changed (user typed something)
+    if (titleValue === previousTitleRef.current) {
+      return
+    }
+
+    // Update previous title reference
+    previousTitleRef.current = titleValue
+
+    // Don't auto-generate if user has manually edited the slug
+    if (userHasEditedSlug.current) {
+      return
+    }
+
+    // Generate and set the new slug
+    const newSlug = generateSlug(titleValue)
+    if (newSlug) {
+      onChange(set({ current: newSlug, _type: 'slug' }))
+    } else if (!titleValue) {
+      onChange(unset())
+    }
+  }, [titleValue, generateSlug, onChange])
+
   const handleKeyDown = useCallback(() => {
-    // Mark that user is actively typing - this flag allows onChange to generate slugs
-    isUserTyping.current = true
-    userHasEdited.current = true
+    isUserTypingInSlug.current = true
+    userHasEditedSlug.current = true
   }, [])
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      // Only generate slug if user was actively typing (keyDown fired)
-      if (isUserTyping.current) {
+      if (isUserTypingInSlug.current) {
         const inputValue = event.target.value
         if (inputValue) {
           onChange(set({ current: toSlug(inputValue, lang), _type: 'slug' }))
         } else {
           onChange(unset())
         }
-        // Reset the flag after processing
-        isUserTyping.current = false
+        isUserTypingInSlug.current = false
       }
-      // If not user typing, just allow the value to display without generating slug
     },
     [onChange, lang]
   )
 
   const handleKeyUp = useCallback(() => {
-    // Reset typing flag after a short delay to catch paste events
     setTimeout(() => {
-      isUserTyping.current = false
+      isUserTypingInSlug.current = false
     }, 100)
   }, [])
 
   const handleReset = useCallback(() => {
-    userHasEdited.current = false
+    userHasEditedSlug.current = false
     const newSlug = generateSlug(titleValue)
     if (newSlug) {
       onChange(set({ current: newSlug, _type: 'slug' }))
@@ -97,15 +127,15 @@ export function AutoSlugInput(props: AutoSlugInputProps) {
     <Stack space={2}>
       <Flex gap={2}>
         <TextInput
-          ref={inputRef}
           value={value?.current || ''}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
           onPaste={() => {
-            isUserTyping.current = true
+            isUserTypingInSlug.current = true
+            userHasEditedSlug.current = true
             setTimeout(() => {
-              isUserTyping.current = false
+              isUserTypingInSlug.current = false
             }, 100)
           }}
           readOnly={readOnly}
