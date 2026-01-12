@@ -3,6 +3,7 @@ import category from './document/category'
 import product from './document/product'
 import publisher from './document/publisher'
 import collection from './document/collection'
+import selection from './document/selection'
 import page from './document/page'
 import blogPost from './document/blog/post'
 import blogAuthor from './document/blog/author'
@@ -31,6 +32,7 @@ export const schemaTypes = [
   // Document types
   product,
   collection,
+  selection,
   profile,
   category,
   publisher,
