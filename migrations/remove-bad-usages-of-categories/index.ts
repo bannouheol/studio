@@ -18,6 +18,7 @@ export const categoryToDeleteIds = [
   'e044794b-046b-4249-8a92-5c11fdcba165', //Bob & Marley
   'e7d77049-0605-4e1b-83c9-16b2b716ce00', //T'choupi
   'ffae789f-d0d2-4f3b-a531-5dade12370b7', //Spot
+  'c39b71ca-3567-4073-beb3-9b081fb799f4', // Planedenn vev
 ]
 
 export default defineMigration({
