@@ -17,6 +17,7 @@ export const collectionIds = [
   'b85259c9-7b76-46a8-91bf-fd7bf6e893af', // Keit vimp bev
   'c6858d2a-df9b-4304-8559-423fccda3ac4', // France 3
   'd73c80a3-0608-40f1-ae06-f35c52ea4186', // Dizale
+  '985cf9b4-5d16-46f0-bb60-752eea7b611f', // Le chant du monde
 ]
 
 export default defineMigration({

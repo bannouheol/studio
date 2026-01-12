@@ -20,8 +20,9 @@ export default defineConfig({
             // Regular document types
             S.documentTypeListItem('product').title('Produits'),
             S.documentTypeListItem('collection').title('Collection'),
+            S.documentTypeListItem('category').title('Catégories'),
+            S.documentTypeListItem('selection').title('Sélections'),
             S.documentTypeListItem('profile').title('Profiles'),
-            S.documentTypeListItem('category').title('Catégories de produits'),
             S.documentTypeListItem('publisher').title('Editeurs'),
             S.documentTypeListItem('page').title('Pages'),
             S.documentTypeListItem('blogPost').title('Articles de presse'),
