@@ -3,7 +3,7 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemas/schema'
-import { vercelDeployTool } from 'sanity-plugin-vercel-deploy'
+//import { vercelDeployTool } from 'sanity-plugin-vercel-deploy'
 import { FaHotjar } from 'react-icons/fa'
 
 export default defineConfig({
@@ -38,7 +38,7 @@ export default defineConfig({
           ]),
     }),
     visionTool(),
-    vercelDeployTool(),
+    //vercelDeployTool(),
   ],
   schema: {
     types: schemaTypes,
