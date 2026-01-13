@@ -1,11 +1,11 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
-import { MdStar } from 'react-icons/md'
+import { FaHotjar } from 'react-icons/fa'
 
 export default defineType({
   name: 'selection',
   title: 'Sélection',
   type: 'document',
-  icon: MdStar,
+  icon: FaHotjar,
   fields: [
     defineField({
       name: 'title',

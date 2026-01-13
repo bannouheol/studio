@@ -28,13 +28,13 @@ export default defineConfig({
             S.documentTypeListItem('blogPost').title('Articles de presse'),
             S.documentTypeListItem('blogAuthor').title('Journal, Radio, ...'),
             S.documentTypeListItem('blogCategory').title('Catégorie de post'),
-            // Our singleton type has a list item with a custom child
+            /* // Our singleton type has a list item with a custom child
             S.listItem().icon(FaHotjar).title('Selection de produits').id('selectedProducts').child(
               // Instead of rendering a list of documents, we render a single
               // document, specifying the `documentId` manually to ensure
               // that we're editing the single instance of the document
               S.document().schemaType('selectedProducts').documentId('selectedProducts')
-            ),
+            ), */
           ]),
     }),
     visionTool(),
