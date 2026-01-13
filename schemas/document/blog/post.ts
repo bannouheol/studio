@@ -102,6 +102,13 @@ export default defineType({
       group: 'media',
     }),
     defineField({
+      name: 'imageCaption',
+      title: 'Légende de l\'image',
+      description: 'Texte affiché sous l\'image principale',
+      type: 'localeText',
+      group: 'media',
+    }),
+    defineField({
       title: 'Fichier audio',
       name: 'audio',
       description: 'Podcast ou enregistrement audio',
