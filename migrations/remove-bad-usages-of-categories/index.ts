@@ -19,6 +19,7 @@ export const categoryToDeleteIds = [
   'e7d77049-0605-4e1b-83c9-16b2b716ce00', //T'choupi
   'ffae789f-d0d2-4f3b-a531-5dade12370b7', //Spot
   'c39b71ca-3567-4073-beb3-9b081fb799f4', // Planedenn vev
+  'b35b8029-491e-4ee2-a1e6-4738af0d74af', // Collection "Koad Glas"
 ]
 
 export default defineMigration({
