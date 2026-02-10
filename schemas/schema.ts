@@ -11,6 +11,7 @@ import blogCategory from './document/blog/category'
 import profile from './document/profile'
 import siteSettings from './document/siteSettings'
 import selectedProducts from './document/selectedProducts'
+import announcement from './document/announcement'
 
 // Object schemas
 import blockContent from './object/blockContent'
@@ -42,6 +43,7 @@ export const schemaTypes = [
   blogCategory,
   siteSettings,
   selectedProducts,
+  announcement,
   // Object types
   blockContent,
   productVariant,

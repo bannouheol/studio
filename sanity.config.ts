@@ -18,6 +18,7 @@ export default defineConfig({
           .title('Content')
           .items([
             // Regular document types
+            S.documentTypeListItem('announcement').title('Annonces'),
             S.documentTypeListItem('product').title('Produits'),
             S.documentTypeListItem('collection').title('Collection'),
             S.documentTypeListItem('category').title('Catégories'),
