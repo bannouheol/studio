@@ -9,8 +9,8 @@ import { FaHotjar } from 'react-icons/fa'
 export default defineConfig({
   name: 'bannouheol',
   title: 'Bannoù-heol',
-  projectId: 'hk48qn3z',
-  dataset: 'staging',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID ?? 'hk48qn3z',
+  dataset: process.env.SANITY_STUDIO_DATASET ?? 'staging',
   plugins: [
     structureTool({
       structure: (S) =>
