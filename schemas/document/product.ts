@@ -1,6 +1,13 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { GiBookCover } from 'react-icons/gi'
-import { MdInfo, MdDescription, MdInventory, MdPeople, MdSettings, MdSearch, MdPermMedia } from 'react-icons/md'
+import {
+  MdInfo,
+  MdDescription,
+  MdInventory,
+  MdPermMedia,
+  MdStraighten,
+} from 'react-icons/md'
+import { BiMoviePlay } from 'react-icons/bi'
 
 export default defineType({
   name: 'product',
@@ -11,11 +18,10 @@ export default defineType({
     { name: 'general', title: 'Général', icon: MdInfo, default: true },
     { name: 'description', title: 'Description', icon: MdDescription },
     { name: 'media', title: 'Médias', icon: MdPermMedia },
-    { name: 'variants', title: 'Images, Prix & Stock', icon: MdInventory },
-    { name: 'bookFeatures', title: 'Caractéristiques du livre', icon: GiBookCover },
-    { name: 'dvdFeatures', title: 'Caractéristiques du DVD', icon: MdSettings },
-    { name: 'traductors', title: 'Traducteur(s)', icon: MdPeople },
-    { name: 'seo', title: 'SEO', icon: MdSearch },
+    { name: 'pricing', title: 'Prix & Stock', icon: MdInventory },
+    { name: 'physical', title: 'Caractéristiques physiques', icon: MdStraighten },
+    { name: 'bookFeatures', title: 'Livre', icon: GiBookCover },
+    { name: 'dvdFeatures', title: 'DVD', icon: BiMoviePlay },
   ],
   fields: [
     // === GÉNÉRAL ===
@@ -52,12 +58,7 @@ export default defineType({
       title: 'Catégories',
       description: 'Catégories pour le filtrage sur le site',
       type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'reference',
-          to: [{ type: 'category' }],
-        }),
-      ],
+      of: [defineArrayMember({ type: 'reference', to: [{ type: 'category' }] })],
       group: 'general',
       validation: (Rule) => Rule.required(),
     }),
@@ -73,9 +74,7 @@ export default defineType({
       title: 'Date de sortie',
       name: 'releaseDate',
       type: 'date',
-      options: {
-        dateFormat: 'DD/MM/YYYY',
-      },
+      options: { dateFormat: 'DD/MM/YYYY' },
       group: 'general',
     }),
     defineField({
@@ -84,6 +83,21 @@ export default defineType({
       description: 'Âge minimum recommandé (en années)',
       type: 'number',
       validation: (Rule) => Rule.min(0).max(18),
+      group: 'general',
+    }),
+    defineField({
+      name: 'seoTitle',
+      title: 'Titre SEO',
+      description:
+        "Titre optimisé pour les moteurs de recherche (s'affiche dans l'onglet du navigateur)",
+      type: 'localeString',
+      group: 'general',
+    }),
+    defineField({
+      title: 'Traducteur(s)',
+      name: 'traductors',
+      type: 'array',
+      of: [defineArrayMember({ type: 'reference', to: [{ type: 'profile' }] })],
       group: 'general',
     }),
 
@@ -98,16 +112,19 @@ export default defineType({
 
     // === MÉDIAS ===
     defineField({
+      name: 'images',
+      title: 'Images',
+      description: 'La première image sera utilisée comme image principale',
+      type: 'array',
+      of: [defineArrayMember({ type: 'image', options: { hotspot: true } })],
+      group: 'media',
+    }),
+    defineField({
       title: 'Vidéos YouTube',
       name: 'youtubeVideos',
       description: 'Vidéos de présentation ou bandes-annonces',
       type: 'array',
-      of: [
-        defineArrayMember({
-          title: 'Vidéo Youtube',
-          type: 'youtube',
-        }),
-      ],
+      of: [defineArrayMember({ title: 'Vidéo Youtube', type: 'youtube' })],
       group: 'media',
     }),
     defineField({
@@ -115,40 +132,76 @@ export default defineType({
       name: 'audioFiles',
       description: 'Extraits audio, podcasts ou enregistrements',
       type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'file',
-          options: {
-            accept: 'audio/*',
-          },
-        }),
-      ],
+      of: [defineArrayMember({ type: 'file', options: { accept: 'audio/*' } })],
       group: 'media',
     }),
 
-    // === VARIANTES & STOCK ===
+    // === PRIX & STOCK ===
     defineField({
-      title: 'Variante principale',
-      name: 'defaultProductVariant',
-      description: 'Prix, stock et images du produit principal',
-      type: 'productVariant',
-      group: 'variants',
+      title: 'Prix (€)',
+      name: 'price',
+      type: 'number',
+      group: 'pricing',
+      validation: (Rule) => Rule.required().positive(),
     }),
     defineField({
-      title: 'Variantes supplémentaires',
-      name: 'variants',
-      description: 'Autres formats disponibles (ex: broché, relié, numérique)',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          title: 'Variante',
-          type: 'productVariant',
-        }),
-      ],
-      group: 'variants',
+      title: 'En stock',
+      name: 'inStock',
+      type: 'boolean',
+      group: 'pricing',
+      validation: (Rule) => Rule.required(),
+      initialValue: true,
+    }),
+    defineField({
+      title: 'Date de réapprovisionnement',
+      description: 'Date approximative à laquelle le client pourra être livré',
+      name: 'resupplyingDate',
+      type: 'date',
+      group: 'pricing',
+      options: { dateFormat: 'DD/MM/YYYY' },
+      hidden: ({ document }) => (document?.inStock as boolean) ?? false,
+    }),
+    defineField({
+      title: 'À paraître',
+      name: 'isForthcoming',
+      description: "Cocher si le produit n'est pas encore sorti",
+      type: 'boolean',
+      group: 'pricing',
+      validation: (Rule) => Rule.required(),
+      initialValue: false,
+    }),
+    defineField({
+      title: 'Autoriser la prévente',
+      name: 'allowPreorder',
+      description: 'Permettre aux clients de commander avant la sortie',
+      type: 'boolean',
+      group: 'pricing',
+      hidden: ({ document }) => !(document?.isForthcoming as boolean),
     }),
 
-    // === CARACTÉRISTIQUES DU LIVRE ===
+    // === CARACTÉRISTIQUES PHYSIQUES ===
+    defineField({
+      title: 'Poids (grammes)',
+      name: 'weight',
+      type: 'number',
+      group: 'physical',
+      validation: (Rule) => Rule.positive(),
+    }),
+    defineField({
+      title: 'Dimensions',
+      name: 'dimensions',
+      description: 'Ex: 21 x 15 cm',
+      type: 'string',
+      group: 'physical',
+    }),
+    defineField({
+      title: 'Code-barres',
+      name: 'barcode',
+      type: 'barcode',
+      group: 'physical',
+    }),
+
+    // === LIVRE ===
     defineField({
       title: 'Caractéristiques du livre',
       name: 'bookFeature',
@@ -156,7 +209,8 @@ export default defineType({
       type: 'bookFeature',
       group: 'bookFeatures',
     }),
-    // === CARACTÉRISTIQUES DU DVD ===
+
+    // === DVD ===
     defineField({
       title: 'Caractéristiques du DVD',
       name: 'dvdFeature',
@@ -164,40 +218,26 @@ export default defineType({
       type: 'dvdFeature',
       group: 'dvdFeatures',
     }),
-    // === TRADUCTEUR(S) ===
-    defineField({
-      title: 'Traducteur(s)',
-      name: 'traductors',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'reference',
-          to: [{ type: 'profile' }],
-        }),
-      ],
-      group: 'traductors',
-    }),
-
-    // === SEO ===
-    defineField({
-      name: 'seoTitle',
-      title: 'Titre SEO',
-      description: "Titre optimisé pour les moteurs de recherche (s'affiche dans l'onglet du navigateur)",
-      type: 'localeString',
-      group: 'seo',
-    }),
   ],
+
+  initialValue: {
+    inStock: true,
+    isForthcoming: false,
+  },
+
   preview: {
     select: {
       titleBr: 'title.br',
       titleFr: 'title.fr',
       collection: 'collection.title.br',
-      media: 'defaultProductVariant.images[0]',
+      media: 'images.0.asset',
       date: 'releaseDate',
     },
     prepare(selection) {
       const { titleBr, titleFr, collection, date, media } = selection
-      const formattedDate = date ? new Intl.DateTimeFormat('fr-FR').format(new Date(date)) : ''
+      const formattedDate = date
+        ? new Intl.DateTimeFormat('fr-FR').format(new Date(date))
+        : ''
       return {
         title: titleBr,
         subtitle: `${titleFr || ''}, ${collection || ''}, ${formattedDate}`,
@@ -205,6 +245,7 @@ export default defineType({
       }
     },
   },
+
   orderings: [
     {
       title: 'Date de sortie, nouveaux',
