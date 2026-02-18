@@ -1,12 +1,6 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { GiBookCover } from 'react-icons/gi'
-import {
-  MdInfo,
-  MdDescription,
-  MdInventory,
-  MdPermMedia,
-  MdStraighten,
-} from 'react-icons/md'
+import { MdInfo, MdDescription, MdInventory, MdPermMedia, MdStraighten } from 'react-icons/md'
 import { BiMoviePlay } from 'react-icons/bi'
 
 export default defineType({
@@ -88,8 +82,7 @@ export default defineType({
     defineField({
       name: 'seoTitle',
       title: 'Titre SEO',
-      description:
-        "Titre optimisé pour les moteurs de recherche (s'affiche dans l'onglet du navigateur)",
+      description: "Titre optimisé pour les moteurs de recherche (s'affiche dans l'onglet du navigateur)",
       type: 'localeString',
       group: 'general',
     }),
@@ -188,11 +181,28 @@ export default defineType({
       validation: (Rule) => Rule.positive(),
     }),
     defineField({
-      title: 'Dimensions',
-      name: 'dimensions',
-      description: 'Ex: 21 x 15 cm',
-      type: 'string',
+      title: 'Largeur (cm)',
+      name: 'width',
+      description: 'Largeur du produit en centimètres',
+      type: 'number',
       group: 'physical',
+      validation: (Rule) => Rule.positive(),
+    }),
+    defineField({
+      title: 'Longueur (cm)',
+      name: 'length',
+      description: 'Longueur du produit en centimètres',
+      type: 'number',
+      group: 'physical',
+      validation: (Rule) => Rule.positive(),
+    }),
+    defineField({
+      title: 'Hauteur (cm)',
+      name: 'height',
+      description: 'Hauteur du produit en centimètres',
+      type: 'number',
+      group: 'physical',
+      validation: (Rule) => Rule.positive(),
     }),
     defineField({
       title: 'Code-barres',
@@ -235,9 +245,7 @@ export default defineType({
     },
     prepare(selection) {
       const { titleBr, titleFr, collection, date, media } = selection
-      const formattedDate = date
-        ? new Intl.DateTimeFormat('fr-FR').format(new Date(date))
-        : ''
+      const formattedDate = date ? new Intl.DateTimeFormat('fr-FR').format(new Date(date)) : ''
       return {
         title: titleBr,
         subtitle: `${titleFr || ''}, ${collection || ''}, ${formattedDate}`,
