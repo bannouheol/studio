@@ -15,11 +15,9 @@ import announcement from './document/announcement'
 
 // Object schemas
 import blockContent from './object/blockContent'
-import productVariant from './object/productVariant'
 import dvdFeature from './object/dvdFeature'
 import bookFeature from './object/bookFeature'
 import youtube from './object/youtube'
-import price from './object/price'
 import barcode from './object/barcode'
 import imageWithCaption from './object/imageWithCaption'
 
@@ -46,11 +44,9 @@ export const schemaTypes = [
   announcement,
   // Object types
   blockContent,
-  productVariant,
   dvdFeature,
   bookFeature,
   youtube,
-  price,
   barcode,
   imageWithCaption,
   // Locale types
